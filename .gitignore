@@ -1,0 +1,37 @@
+ # Compiled Python files
+ *.pyc
+ *.pyo
+ __pycache__/
+ 
+ # Build directories
+ build/
+ dist/
+ *.egg-info/
+ 
+ # Temporary files
+ *.tmp
+ *.log
+ 
+ # C/C++ build artifacts
+ *.o
+ *.so
+ *.a
+ 
+ # Test output
+ test_output/
+ *.gcda
+ *.gcno
+ 
+ # IDE specific files
+ .idea/
+ .vscode/
+ *.swp
+ 
+ # Miscellaneous
+ .DS_Store
+ Thumbs.db
+ 
+ # Python virtual environment directories
+ venv/
+ env/
+ .venv/
