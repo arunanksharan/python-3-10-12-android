@@ -12,20 +12,33 @@ module pwd
 [clinic start generated code]*/
 /*[clinic end generated code: output=da39a3ee5e6b4b0d input=60f628ef356b97b6]*/
 
+// #ifdef __ANDROID__
+// #ifndef HAVE_SETPWENT
+// static void setpwent(void) {}
+// #endif
+
+// #ifndef HAVE_ENDPWENT
+// static void endpwent(void) {}
+// #endif
+
+// #ifndef HAVE_GETPWENT
+// static struct passwd *getpwent(void) {
+//     return NULL;
+// }
+// #endif
+// #endif
+
 #ifdef __ANDROID__
-#ifndef HAVE_SETPWENT
+#include <pwd.h>
+#undef HAVE_ENDPWENT
+#undef HAVE_SETPWENT
+#undef HAVE_GETPWENT
+
 static void setpwent(void) {}
-#endif
-
-#ifndef HAVE_ENDPWENT
 static void endpwent(void) {}
-#endif
-
-#ifndef HAVE_GETPWENT
 static struct passwd *getpwent(void) {
     return NULL;
 }
-#endif
 #endif
 
 static PyStructSequence_Field struct_pwd_type_fields[] = {
