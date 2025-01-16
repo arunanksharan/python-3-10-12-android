@@ -12,6 +12,18 @@ module pwd
 [clinic start generated code]*/
 /*[clinic end generated code: output=da39a3ee5e6b4b0d input=60f628ef356b97b6]*/
 
+#ifndef __ANDROID__
+    setpwent();
+    while ((p = getpwent()) != NULL) {
+        // Existing code to process passwd entries
+    }
+    endpwent();
+#else
+    PyErr_SetString(PyExc_NotImplementedError,
+                    "passwd database functions are not available on Android");
+    return NULL;
+#endif
+
 static PyStructSequence_Field struct_pwd_type_fields[] = {
     {"pw_name", "user name"},
     {"pw_passwd", "password"},
