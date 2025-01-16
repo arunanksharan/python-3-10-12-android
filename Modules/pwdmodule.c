@@ -14,7 +14,9 @@ module pwd
 
 #ifdef __ANDROID__
 static void setpwent() {}
-static void endpwent() {}
+#ifndef HAVE_ENDPWENT
+static void endpwent(void) {}  // Ensure compatibility if not already defined
+#endif
 static struct passwd *getpwent() {
     return NULL;
 }
@@ -327,6 +329,7 @@ pwd_getpwall_impl(PyObject *module)
     endpwent();
     return d;
 }
+#endif
 #endif
 
 static PyMethodDef pwd_methods[] = {
