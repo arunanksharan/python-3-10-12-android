@@ -12,16 +12,12 @@ module pwd
 [clinic start generated code]*/
 /*[clinic end generated code: output=da39a3ee5e6b4b0d input=60f628ef356b97b6]*/
 
-#ifndef __ANDROID__
-    setpwent();
-    while ((p = getpwent()) != NULL) {
-        // Existing code to process passwd entries
-    }
-    endpwent();
-#else
-    PyErr_SetString(PyExc_NotImplementedError,
-                    "passwd database functions are not available on Android");
+#ifdef __ANDROID__
+static void setpwent() {}
+static void endpwent() {}
+static struct passwd *getpwent() {
     return NULL;
+}
 #endif
 
 static PyStructSequence_Field struct_pwd_type_fields[] = {
@@ -300,6 +296,15 @@ Return a list of all available password database entries, in arbitrary order.
 See help(pwd) for more on password database entries.
 [clinic start generated code]*/
 
+#ifdef __ANDROID__
+static PyObject *
+pwd_getpwall_impl(PyObject *module)
+{
+    PyErr_SetString(PyExc_NotImplementedError,
+                    "passwd database functions are not available on Android.");
+    return NULL;
+}
+#else
 static PyObject *
 pwd_getpwall_impl(PyObject *module)
 /*[clinic end generated code: output=4853d2f5a0afac8a input=d7ecebfd90219b85]*/
