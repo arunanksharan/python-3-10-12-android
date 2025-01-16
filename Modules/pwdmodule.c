@@ -28,18 +28,18 @@ module pwd
 // #endif
 // #endif
 
-#ifdef __ANDROID__
-#include <pwd.h>
-#undef HAVE_ENDPWENT
-#undef HAVE_SETPWENT
-#undef HAVE_GETPWENT
+// #ifdef __ANDROID__
+// #include <pwd.h>
+// #undef HAVE_ENDPWENT
+// #undef HAVE_SETPWENT
+// #undef HAVE_GETPWENT
 
-static void setpwent(void) {}
-static void endpwent(void) {}
-static struct passwd *getpwent(void) {
-    return NULL;
-}
-#endif
+// static void setpwent(void) {}
+// static void endpwent(void) {}
+// static struct passwd *getpwent(void) {
+//     return NULL;
+// }
+// #endif
 
 static PyStructSequence_Field struct_pwd_type_fields[] = {
     {"pw_name", "user name"},
